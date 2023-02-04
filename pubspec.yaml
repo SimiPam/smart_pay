@@ -1,0 +1,62 @@
+name: smart_pay
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  get: 4.6.1
+  rxdart: 0.27.3
+  http: ^0.13.1
+  intl: ^0.17.0
+  route_observer_mixin: ^1.5.1
+  flutter_screenutil: ^5.0.0+2
+  shared_preferences: ^2.0.15
+  provider: 6.0.2
+  pin_code_fields: ^7.3.0
+  json_annotation: ^4.4.0
+  freezed_annotation: ^2.0.1
+  flutter_svg: any
+  lottie: ^2.1.0
+  country_picker: ^2.0.19
+  flutter_cupertino_date_picker_fork: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+    - assets/images/
+    - assets/svg/
+    - assets/lottie/
+
+  fonts:
+    - family: sf-pro-display
+      fonts:
+        - asset: assets/fonts/sf-pro-display/SFPRODISPLAYBLACKITALIC.OTF
+        - asset: assets/fonts/sf-pro-display/SFPRODISPLAYBOLD.OTF
+        - asset: assets/fonts/sf-pro-display/SFPRODISPLAYSEMIBOLDITALIC.OTF
+        - asset: assets/fonts/sf-pro-display/SFPRODISPLAYMEDIUM.OTF
+        - asset: assets/fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF
+        - asset: assets/fonts/sf-pro-display/SFPRODISPLAYLIGHTITALIC.OTF
+        - asset: assets/fonts/sf-pro-display/SFPRODISPLAYULTRALIGHTITALIC.OTF
+        - asset: assets/fonts/sf-pro-display/SFPRODISPLAYTHINITALIC.OTF
+        - asset: assets/fonts/sf-pro-display/SFPRODISPLAYHEAVYITALIC.OTF
+
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
