@@ -96,8 +96,8 @@ class OnboardingScreen extends StatelessWidget {
                       },
                       itemCount: viewModel.slides.length,
                       itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        return ListView(
+                          // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             HSpace(65.h),
                             SvgPicture.asset(viewModel.slides[index].fgImage),
@@ -114,7 +114,7 @@ class OnboardingScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Styles.medium(
+                        Styles.semiBold(
                           viewModel.slidesContent[viewModel.contentIndex!]
                               .headerText,
                           fontSize: 24.sp,

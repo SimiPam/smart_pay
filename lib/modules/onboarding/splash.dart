@@ -32,13 +32,17 @@ class _SplashScreenState extends State<SplashScreen> {
   route() async {
     SharedPreferences? prefs = await SharedPreferences.getInstance();
     bool? isUserFirstTime = false;
-
-    isUserFirstTime = json.decode(prefs!.getString('userFirstTime')!);
-    debugPrint(isUserFirstTime.toString());
-    if (isUserFirstTime!) {
-      navPushReplace(context!, RoutePaths.onboarding);
+    var output = prefs!.getString('userFirstTime');
+    if (output != null) {
+      isUserFirstTime = json.decode(output!);
+      debugPrint(isUserFirstTime.toString());
+      if (isUserFirstTime!) {
+        navPushReplace(context!, RoutePaths.onboarding);
+      } else {
+        navPushReplace(context!, RoutePaths.signIn);
+      }
     } else {
-      navPushReplace(context!, RoutePaths.signIn);
+      navPushReplace(context!, RoutePaths.onboarding);
     }
   }
 

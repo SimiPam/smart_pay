@@ -32,7 +32,7 @@ AppBar buildAppbar(
     actions: isOnboarding
         ? [
             TextButton(
-              child: Styles.medium('Skip',
+              child: Styles.semiBold('Skip',
                   color: AppColors.secondaryColor, fontSize: 16.sp),
               onPressed: () {
                 Navigator.pushNamed(context, RoutePaths.signUp);
