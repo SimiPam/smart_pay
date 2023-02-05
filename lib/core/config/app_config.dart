@@ -4,7 +4,7 @@
 const String _prodUrl = '';
 
 // here we have the settings for dev
-const String _devUrl = '';
+const String _devUrl = '146.190.74.11';
 
 class AppConfig {
   AppConfig();
@@ -13,14 +13,8 @@ class AppConfig {
   // it should be done manually here instead.
   static bool isProd = false;
 
-  static int storeCacheDebounceSeconds = 3;
-
-  static int profilePictureTimestamp = DateTime.now().millisecondsSinceEpoch;
-
-  static String versionNumber = '0.0.1 (1)';
-
   static String get apiProtocol {
-    return AppConfig.isProd ? 'https' : 'https';
+    return AppConfig.isProd ? 'https' : 'http';
   }
 
   static String get apiDomain {

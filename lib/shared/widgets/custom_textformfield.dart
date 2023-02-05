@@ -71,7 +71,7 @@ class CustomTextFormField extends StatelessWidget {
               fontSize: 16.sp,
               fontWeight: fontWeight ?? FontWeight.w400),
           enabled: isEnabled,
-          obscuringCharacter: '⚫',
+          // obscuringCharacter: '⚫',
           textCapitalization: TextCapitalization.sentences,
           autovalidateMode: autovalidateMode,
           inputFormatters: inputFormatters,

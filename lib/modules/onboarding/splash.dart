@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../router/route_paths.dart';
 import '../../shared/utils/assets.dart';
@@ -27,8 +29,17 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(duration, route);
   }
 
-  route() {
-    Navigator.pushReplacementNamed(context, RoutePaths.onboarding);
+  route() async {
+    SharedPreferences? prefs = await SharedPreferences.getInstance();
+    bool? isUserFirstTime = false;
+
+    isUserFirstTime = json.decode(prefs!.getString('userFirstTime')!);
+    debugPrint(isUserFirstTime.toString());
+    if (isUserFirstTime!) {
+      navPushReplace(context!, RoutePaths.onboarding);
+    } else {
+      navPushReplace(context!, RoutePaths.signIn);
+    }
   }
 
   @override

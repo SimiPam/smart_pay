@@ -22,7 +22,9 @@ class _EmailOTPScreenState extends State<EmailOTPScreen>
     with TickerProviderStateMixin {
   final formKey = GlobalKey<FormState>();
   int levelClock = 30;
+
   late AnimationController _controller;
+
   @override
   void dispose() {
     _controller.dispose();
@@ -70,7 +72,8 @@ class _EmailOTPScreenState extends State<EmailOTPScreen>
                   HSpace(12.h),
                   Styles.richTextStyle(
                     text1: "We send a code to ( ",
-                    text2: "*****@mail.com ",
+                    text2:
+                        "*****@${(viewModel.userEmail!.split("@")).removeAt(1)} ",
                     text3: "). Enter it here to verify your identity",
                     colorOne: AppColors.greyscaleTextColor,
                     colorTwo: AppColors.primaryColor,
@@ -97,15 +100,13 @@ class _EmailOTPScreenState extends State<EmailOTPScreen>
                         selectedColor: AppColors.otpBorderColor,
                         selectedFillColor: AppColors.greyscale50Color,
                         errorBorderColor: AppColors.red,
-
-                        // activeFillColor: AppColors.red,
                         borderWidth: 1,
                         inactiveFillColor: AppColors.greyscale50Color,
                         activeFillColor: AppColors.greyscale50Color,
                         activeColor: AppColors.otpBorderColor,
                         inactiveColor: AppColors.greyscale50Color,
                         borderRadius: BorderRadius.circular(12.r)),
-                    animationDuration: Duration(milliseconds: 300),
+                    animationDuration: const Duration(milliseconds: 300),
                     backgroundColor: AppColors.white,
                     cursorColor: AppColors.primaryColor,
                     enableActiveFill: true,
@@ -113,18 +114,8 @@ class _EmailOTPScreenState extends State<EmailOTPScreen>
                     controller: viewModel.pinPutController,
                     onChanged: viewModel.activateVerifyBtn,
                     onCompleted: viewModel.validateOTP,
-                    beforeTextPaste: (text) {
-                      // print("Allowing to paste $text");
-                      //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                      return true;
-                    },
                   ),
                   HSpace(32.h),
-                  // Center(
-                  //   child: Styles.bold('Resend Code 30 secs',
-                  //       color: AppColors.greyscale600Color, fontSize: 16.sp),
-                  // ),
                   Countdown(
                     animation: StepTween(
                       begin: levelClock, // THIS IS A USER ENTERED NUMBER
@@ -135,7 +126,7 @@ class _EmailOTPScreenState extends State<EmailOTPScreen>
                   CustomButton(
                       margin: 0.w,
                       title: 'Confirm',
-                      isActive: viewModel.isActive,
+                      isActive: viewModel.isActive!,
                       nonActiveBtnColor:
                           AppColors.primaryColor.withOpacity(0.4),
                       txtColor: AppColors.white,
@@ -143,7 +134,6 @@ class _EmailOTPScreenState extends State<EmailOTPScreen>
                       fontWeight: FontWeight.normal,
                       onPress: () {
                         viewModel.validateOTP(viewModel.pinPutController.text);
-                        // Navigator.pushNamed(context, RoutePaths.createPassword);
                       }),
                   HSpace(40.h),
                 ],

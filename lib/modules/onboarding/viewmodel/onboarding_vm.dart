@@ -43,7 +43,9 @@ class OnBoardingViewModel extends BaseViewModel {
     _pageAnimationTimer = Timer.periodic(const Duration(seconds: 7), (timer) {
       animatePages();
     });
+
     _controller = PageController(initialPage: 0);
+    index();
   }
 
   animatePages() {
@@ -54,6 +56,15 @@ class OnBoardingViewModel extends BaseViewModel {
         curve: Curves.easeIn,
       );
     }
+  }
+
+  index() {
+    _controller!.addListener(() {
+      if (controller!.page!.round() != currentIndex) {
+        _currentIndex = controller!.page!.round();
+        notifyListeners();
+      }
+    });
   }
 
   updatePageIndex(int index) {

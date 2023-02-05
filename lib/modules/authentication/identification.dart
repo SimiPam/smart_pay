@@ -26,40 +26,37 @@ class IdentificationScreen extends StatelessWidget {
   Widget _buildScreen(BuildContext context, AuthViewModel viewModel) {
     return Scaffold(
       appBar: buildAppbar(context: context),
-      body: SizedBox(
+      body: Container(
         height: deviceHeight(context).h,
-        width: deviceWidth(context),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: ListView(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HSpace(20.h),
-              Styles.richTextStyleTwo(
-                text1: "Hey there! tell us a bit \nabout ",
-                text2: "yourself",
-                colorOne: AppColors.primaryColor,
-                colorTwo: AppColors.secondaryColor,
-                fontWeight: FWt.bold,
-                fontWeightTwo: FWt.bold,
-                fontSize: 24.sp,
-                fontSizeTwo: 24.sp,
-              ),
-              HSpace(32.h),
-              _signUpForm(viewModel, context),
-              HSpace(30.h),
-              CustomButton(
-                  margin: 0.w,
-                  title: 'Sign Up',
-                  isActive: true,
-                  nonActiveBtnColor: AppColors.primaryColor.withOpacity(0.4),
-                  txtColor: AppColors.white,
-                  txtSize: 17.sp,
-                  fontWeight: FontWeight.normal,
-                  onPress: viewModel.validateSignUp),
-              HSpace(30.h),
-            ],
-          ),
+        width: deviceWidth(context).w,
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: ListView(
+          children: [
+            HSpace(20.h),
+            Styles.richTextStyleTwo(
+              text1: "Hey there! tell us a bit \nabout ",
+              text2: "yourself",
+              colorOne: AppColors.primaryColor,
+              colorTwo: AppColors.secondaryColor,
+              fontWeight: FWt.bold,
+              fontWeightTwo: FWt.bold,
+              fontSize: 24.sp,
+              fontSizeTwo: 24.sp,
+            ),
+            HSpace(32.h),
+            _signUpForm(viewModel, context),
+            HSpace(30.h),
+            CustomButton(
+                margin: 0.w,
+                title: 'Sign Up',
+                isActive: true,
+                nonActiveBtnColor: AppColors.primaryColor.withOpacity(0.4),
+                txtColor: AppColors.white,
+                txtSize: 17.sp,
+                fontWeight: FontWeight.normal,
+                onPress: viewModel.validateSignUp),
+            HSpace(30.h),
+          ],
         ),
       ),
     );
@@ -80,7 +77,7 @@ class IdentificationScreen extends StatelessWidget {
             HSpace(16.h),
             CustomTextFormField(
               hintText: 'UserName',
-              controller: viewModel.lNameController,
+              controller: viewModel.uNameController,
               validator: FieldValidator.validate,
               autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
@@ -91,8 +88,7 @@ class IdentificationScreen extends StatelessWidget {
                   context: context,
                   showPhoneCode: true,
                   onSelect: (Country country) {
-                    viewModel.countryController.text =
-                        "${country.flagEmoji} ${country.name}";
+                    viewModel.selectCountry(country);
                   },
                   countryListTheme: CountryListThemeData(
                     bottomSheetHeight: deviceHeight(context) * 0.75,
@@ -133,14 +129,14 @@ class IdentificationScreen extends StatelessWidget {
             CustomTextFormField(
                 hintText: 'Password',
                 controller: viewModel.passwordController,
-                obscureText: !viewModel.passVisible,
+                obscureText: !viewModel.passVisible!,
                 validator: PasswordValidator.passwordvalidator,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 suffixIcon: PasswordVisibilityBtn(
                   onPress: () {
                     viewModel.hidePassword();
                   },
-                  isVisible: viewModel.passVisible,
+                  isVisible: viewModel.passVisible!,
                 )),
           ],
         ));

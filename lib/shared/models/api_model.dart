@@ -14,6 +14,7 @@ class ApiResponse<T> {
     this.data,
     this.meta,
     this.pagination,
+    this.errors,
   });
 
   bool? status;
@@ -21,18 +22,19 @@ class ApiResponse<T> {
   T? data;
   List<dynamic>? meta;
   List<dynamic>? pagination;
+  dynamic errors;
 
   factory ApiResponse.fromJson(Map<String, dynamic> json) => ApiResponse(
-        status: json["status"],
-        message: json["message"],
-        data: json["data"],
-        meta: json["meta"] == null
-            ? []
-            : List<dynamic>.from(json["meta"]!.map((x) => x)),
-        pagination: json["pagination"] == null
-            ? []
-            : List<dynamic>.from(json["pagination"]!.map((x) => x)),
-      );
+      status: json["status"],
+      message: json["message"],
+      data: json["data"],
+      meta: json["meta"] == null
+          ? []
+          : List<dynamic>.from(json["meta"]!.map((x) => x)),
+      pagination: json["pagination"] == null
+          ? []
+          : List<dynamic>.from(json["pagination"]!.map((x) => x)),
+      errors: json["errors"] == null);
 
   Map<String, dynamic> toJson() => {
         "status": status,
@@ -42,6 +44,7 @@ class ApiResponse<T> {
         "pagination": pagination == null
             ? []
             : List<dynamic>.from(pagination!.map((x) => x)),
+        "errors": errors,
       };
 
   @override

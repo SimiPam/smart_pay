@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:route_observer_mixin/route_observer_mixin.dart';
 import 'package:smart_pay/router/main_router.dart';
+import 'package:smart_pay/router/route_paths.dart';
 import 'package:smart_pay/shared/utils/color.dart';
 import 'package:smart_pay/shared/utils/utils.dart';
 
 import 'core/service-injector/service_injector.dart';
-import 'router/route_paths.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,8 +27,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // bool _initialized = false;
-
   @override
   void initState() {
     _init();
@@ -49,28 +47,20 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _init() async {
     await si.init();
-
-    // setState(() {
-    //   _initialized = true;
-    // });
   }
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(logicalWidth(), logicalHeight()),
-      builder: (context, Widget? child) =>
-          // MultiProvider(
-          // providers: allProviders,
-          // child:
-          MaterialApp(
+      builder: (context, Widget? child) => MaterialApp(
         title: 'SmartPay',
         debugShowCheckedModeBanner: false,
         initialRoute: RoutePaths.splash,
         onGenerateRoute: MainRouter.generateRoute,
         theme: ThemeData(
           backgroundColor: AppColors.white,
-          fontFamily: 'Avenir',
+          fontFamily: 'sf-pro-display',
         ),
       ),
       // ),

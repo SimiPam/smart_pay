@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_pay/shared/utils/color.dart';
-import 'package:smart_pay/shared/widgets/space.dart';
 
 import '../utils/utils.dart';
 
 snackBar({
   required BuildContext context,
   required String message,
-  required String title,
   required bool isError,
+  bool? isbottomSheet = false,
   double? width,
   double? height,
 }) {
@@ -18,7 +17,11 @@ snackBar({
       behavior: SnackBarBehavior.floating,
       backgroundColor: Colors.white,
       elevation: 0,
-      padding: EdgeInsets.zero,
+      // padding: ,
+      padding: isbottomSheet!
+          ? EdgeInsetsDirectional.only(
+              bottom: AppBar().preferredSize.height * 7)
+          : EdgeInsets.zero,
       margin: const EdgeInsets.only(bottom: 50.0),
       content: Column(
         mainAxisSize: MainAxisSize.min, // needed for flexible height
@@ -27,16 +30,14 @@ snackBar({
             padding:
                 EdgeInsets.only(bottom: 24.h, top: 6.h, left: 24.w, right: 4.w),
             alignment: Alignment.center,
-            width: deviceWidth(context) * 0.8,
+            width: deviceWidth(context) * 0.9,
             height: height,
             // color: white,
             decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-                        color: isError == true
-                            ? AppColors.red
-                            : AppColors.primaryColor,
-                        width: 2.5))),
+                color: isError == true
+                    ? AppColors.warningColor
+                    : AppColors.primaryColor,
+                borderRadius: BorderRadius.circular(4.r)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,14 +54,8 @@ snackBar({
                     ),
                   ),
                 ),
-                Styles.medium(
-                  title,
-                  fontSize: 15.sp,
-                  color:
-                      isError == true ? AppColors.red : AppColors.primaryColor,
-                ),
-                HSpace(8.h),
-                Styles.regular(message, fontSize: 13.sp),
+                Styles.regular(message,
+                    fontSize: 13.sp, color: AppColors.white),
               ],
             ),
           ),
